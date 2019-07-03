@@ -38,7 +38,9 @@ mnist = input_data.read_data_sets("./data/", one_hot = True)
 
 # 入力データの定義(入力データなので placeholder で定義する)
 x = tf.placeholder(tf.float32, [None, 784])
-# 入力画像をログに出力
+
+# 入力画像
+# (バッチサイズ, 高さ, 横幅, チャネル数) に変換
 img = tf.reshape(x, [-1, 28, 28, 1])
 tf.summary.image("input_data", img, 100)
 
