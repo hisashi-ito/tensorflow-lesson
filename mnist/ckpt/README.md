@@ -1,4 +1,4 @@
-# Model 
+# Model Files
 * checkpoint  
 管理対象ファイルが記載されたファイル
 * my_model.data-00000-of-00001  
