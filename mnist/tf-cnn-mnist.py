@@ -80,10 +80,10 @@ with tf.name_scope("hidden"):
     h_fc1 = tf.nn.relu(tf.matmul(h_pool2_flat, w_fc1) + b_fc1)
 
     # 中間層の重みの分布をログ出力
-    tf.summary.histogram("h_conv1", h_conv1)
-    tf.summary.histogram("h_conv2", h_conv2)
-    tf.summary.histogram("h_pool1", h_pool1)
-    tf.summary.histogram("h_pool2", h_pool2)
+    # tf.summary.histogram("h_conv1", h_conv1)
+    # tf.summary.histogram("h_conv2", h_conv2)
+    # tf.summary.histogram("h_pool1", h_pool1)
+    # tf.summary.histogram("h_pool2", h_pool2)
     
 # 中間層(h_1)から出力層(out)
 with tf.name_scope("output"):
@@ -132,17 +132,17 @@ with tf.Session(config=config) as sess:
     # テスト用の全正解データ (10000,10)
     test_labels = mnist.test.labels
 
-    for i in range(200):
+    for i in range(1000):
         step = i + 1
         train_images, train_labels = mnist.train.next_batch(BATCH_SIZE)
         sess.run(train_step, feed_dict = {x: train_images, y: train_labels})
-        if step % 10 == 0:
+        if step % 100 == 0:
             # ログを取る処理をする
             summary_str = sess.run(summary_op, feed_dict = {x: test_images, y: test_labels})
             summary_writer.add_summary(summary_str, step)
             acc_val = sess.run(accuracy,feed_dict = {x: test_images, y: test_labels})
             print('Step %d: accuracy = %.2f' % (step, acc_val))
-    
+            saver.save(sess, 'ckpt/my_model', global_step = step, write_meta_graph = False)
     # モデル保存
     saver.save(sess, 'ckpt/my_model')
     
