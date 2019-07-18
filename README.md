@@ -12,5 +12,10 @@ tensorflow-gpu 1.11.0
 tensorboard 1.11.0
 numpy 1.15.2  
 ```
-## サンプル
-1. mnist
+## ディレクトリ構成
+1. docker  
+container用資材(GPU用)  
+2. mnist  
+mnist用資材
+
+
